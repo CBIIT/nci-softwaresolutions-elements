@@ -24,12 +24,16 @@
   &lt;script src="https://cbiit.github.io/nci-softwaresolutions-elements/components/include-html.js"&gt;&lt;/script&gt;
 &lt;/head&gt;
 
-&lt;header&gt;
-  &lt!-- Set component's src attribute to url of html snippet --&gt;
-  &lt;include-html src="https://cbiit.github.io/nci-softwaresolutions-elements/banners/government-shutdown.html"&gt;&lt;/include-html&gt;
+&lt;body&gt;
+  &lt;header&gt;
+    &lt!-- Set component's src attribute to url of html snippet --&gt;
+    &lt;include-html src="https://cbiit.github.io/nci-softwaresolutions-elements/banners/government-shutdown.html"&gt;&lt;/include-html&gt;
+    ...
+  &lt;/header&gt;
   ...
-&lt;/header&gt;
-    </pre>
+&lt;/body&gt;
+
+</pre>
 
     <p><strong>Rationale: </strong>HTML snippets (eg: official notices) can be managed centrally, and applications can include arbitrary markup without requiring a redeployment of application code. For example, the government shutdown banner html snippet can be updated/enabled/disabled within minutes, which will be reflected the next time the snippet is rendered by any application.</p>
     <p><strong>Security Concerns: </strong>Javascript is disabled within the snippet. However, loading any resources within the snippet incurs GET requests to the resource server, which can leak information. Always load resources from trusted sources.</p>
