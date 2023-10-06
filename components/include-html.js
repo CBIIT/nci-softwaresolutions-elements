@@ -25,8 +25,26 @@ class IncludeHtml extends HTMLElement {
   async refresh() {
     const sourceUrl = this.getAttribute("src");
     const response = await fetch(sourceUrl, { cache: "no-store" });
-    // Disable scripts by setting innerHTML directly (as opposed to appendChild)
-    this.shadow.innerHTML = response.ok ? await response.text() : ""; 
+    const html = response.ok ? await response.text() : "";
+    const enabled = this.getConfig(html)?.ENABLED?.toUpperCase() ?? "TRUE";
+    if (enabled === "TRUE") {
+      // Disable scripts by setting innerHTML directly (as opposed to appendChild)
+      this.shadow.innerHTML = html; 
+    }
+  }
+
+  /**
+   * Returns an object containing configuration keys and values, defined as <!--KEY=VALUE--> in the html.
+   * @param {string} html 
+   * @returns {{object}} Config object
+   */
+  getConfig(html) {
+    const matches = html.matchAll(/<!--(.*)=(.*)-->/g);
+    const config = {};
+    for (const [match, key, value] of matches) {
+      config[key.trim()] = value.trim();
+    }
+    return config;
   }
 }
 
