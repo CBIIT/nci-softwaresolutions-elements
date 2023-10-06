@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script src="https://cbiit.github.io/nci-softwaresolutions-elements/components/include-html.js"></script>
+  <script src="../components/include-html.js"></script>
   <style>
     * { margin: 0; } 
     main { margin: 15px auto; padding: 15px; max-width: 1024px; overflow: auto;  } </style>
@@ -12,7 +12,7 @@
 </head>
 <body>
   <header>
-    <include-html src="https://cbiit.github.io/nci-softwaresolutions-elements/banners/government-shutdown-test.html"></include-html>
+    <include-html src="../banners/government-shutdown-test.html"></include-html>
   </header>
   <main>
     <h2>Example Usage</h2>
@@ -27,7 +27,7 @@
 &lt;body&gt;
   &lt;header&gt;
     &lt!-- Set component's src attribute to url of html snippet --&gt;
-    &lt;include-html src="https://cbiit.github.io/nci-softwaresolutions-elements/banners/government-shutdown-test.html"&gt;&lt;/include-html&gt;
+    &lt;include-html src="https://cbiit.github.io/nci-softwaresolutions-elements/banners/government-shutdown.html"&gt;&lt;/include-html&gt;
     ...
   &lt;/header&gt;
   ...
@@ -36,8 +36,14 @@
 </pre>
 
     <p><strong>Rationale: </strong>HTML snippets (eg: official notices) can be managed centrally, and applications can include arbitrary markup without requiring a redeployment of application code. For example, the government shutdown banner html snippet can be updated/enabled/disabled within minutes, which will be reflected the next time the snippet is rendered by any application.</p>
+    <br>
+    <p>
+      <strong>Enabling/Disabling: </strong>An optional comment can be included in the first line of the html snippet to enable or disable the snippet. Without this comment, the snippet is enabled by default.
+      <br>To enable the snippet, use: <code>&lt;!-- ENABLED=TRUE --&gt;</code> 
+      <br>To disable the snippet, use: <code>&lt;!-- ENABLED=FALSE --&gt;</code> 
+    </p>
+    <br>
     <p><strong>Security Concerns: </strong>Javascript is disabled within the snippet. However, loading any resources within the snippet incurs GET requests to the resource server, which can leak information. Always load resources from trusted sources.</p>
-
   </main>
 </body>
 </html>
