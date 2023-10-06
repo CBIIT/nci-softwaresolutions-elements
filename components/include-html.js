@@ -36,7 +36,7 @@ class IncludeHtml extends HTMLElement {
   /**
    * Returns an object containing configuration keys and values, defined as <!--KEY=VALUE--> in the html.
    * @param {string} html 
-   * @returns {{object}} Config object
+   * @returns {Record<string, string>} Config object
    */
   getConfig(html) {
     const matches = html.matchAll(/<!--(.*)=(.*)-->/g);
