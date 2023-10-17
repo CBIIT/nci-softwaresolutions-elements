@@ -28,10 +28,10 @@ class IncludeHtml extends HTMLElement {
     const response = await fetch(sourceUrl, { cache: "no-store" });
     const html = response.ok ? await response.text() : "";
     const enabled = this.getConfig(html)?.ENABLED?.toUpperCase() ?? "TRUE";
-    if (enabled === "TRUE") {
-      // Disable scripts by setting innerHTML directly (as opposed to appendChild)
-      this.shadow.innerHTML = this.formatTemplate(html, templateData);
-    }
+    // Disable scripts by setting innerHTML directly (as opposed to appendChild)
+    this.shadow.innerHTML = enabled === "TRUE"
+      ? this.formatTemplate(html, templateData)
+      : "";
   }
 
   /**
